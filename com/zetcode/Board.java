@@ -16,7 +16,7 @@ public class Board extends JPanel {
 
     private final int BOARD_WIDTH = 10;
     private final int BOARD_HEIGHT = 22;
-    private final int PERIOD_INTERVAL = 300;
+    private final int PERIOD_INTERVAL = 300; //게임속도
 
     private Timer timer;
     private boolean isFallingFinished = false;
@@ -35,9 +35,9 @@ public class Board extends JPanel {
 
     private void initBoard(Tetris parent) {
 
-        setFocusable(true);
-        statusbar = parent.getStatusBar();
-        addKeyListener(new TAdapter());
+        setFocusable(true); // setFocusable(true) -> 포커스를 우선적으로 받음
+        statusbar = parent.getStatusBar(); // Tetris.java함수. JLabel리턴
+        addKeyListener(new TAdapter()); //맨마지막에 선언되어있음. 키입력에 따른 처리
     }
 
     private int squareWidth() {
@@ -94,7 +94,7 @@ public class Board extends JPanel {
         var size = getSize();
         int boardTop = (int) size.getHeight() - BOARD_HEIGHT * squareHeight();
 
-        for (int i = 0; i < BOARD_HEIGHT; i++) {
+        for (int i = 0; i < BOARD_HEIGHT; i++) { //바닥에 떨어진 모형이나 잔해들을 색칠함. 모든 사각형들은 Board 배열에 저장되어 있음.
 
             for (int j = 0; j < BOARD_WIDTH; j++) {
 
@@ -108,7 +108,7 @@ public class Board extends JPanel {
             }
         }
 
-        if (curPiece.getShape() != Tetrominoe.NoShape) {
+        if (curPiece.getShape() != Tetrominoe.NoShape) { //떨어지고 있는 도형 색칠
 
             for (int i = 0; i < 4; i++) {
 
@@ -265,14 +265,15 @@ public class Board extends JPanel {
         var color = colors[shape.ordinal()];
 
         g.setColor(color);
-        g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
+        g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2); 
+        // fillrect() -> 배경을 채움 좌표(x+1, y+1)에 (squareWidth()-2, squareHeight()-2)만큼 사각형을 그림 
 
-        g.setColor(color.brighter());
-        g.drawLine(x, y + squareHeight() - 1, x, y);
+        g.setColor(color.brighter()); //brighter : 현재 객체보다 한 단계 더 밝은 색을 갖는 Color 객체를 리턴
+        g.drawLine(x, y + squareHeight() - 1, x, y); //(x,y + squareHeight() - 1)좌표에서 (x,y)좌표까지 직선을 그림
         g.drawLine(x, y, x + squareWidth() - 1, y);
 
-        g.setColor(color.darker());
-        g.drawLine(x + 1, y + squareHeight() - 1,
+        g.setColor(color.darker()); //darker : 현재 객체보다 한 단계 더 어두운 색을 갖는 Color 객체를 리턴
+        g.drawLine(x + 1, y + squareHeight() - 1, 
                 x + squareWidth() - 1, y + squareHeight() - 1);
         g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
                 x + squareWidth() - 1, y + 1);
@@ -300,7 +301,7 @@ public class Board extends JPanel {
             return;
         }
 
-        if (isFallingFinished) {
+        if (isFallingFinished) { //끝에 도달할 경우 새로운도형 아니면 한줄 내리기
 
             isFallingFinished = false;
             newPiece();
@@ -323,7 +324,7 @@ public class Board extends JPanel {
             int keycode = e.getKeyCode();
 
             // Java 12 switch expressions
-            switch (keycode) {
+            switch (keycode) { // 조작
 
                 case KeyEvent.VK_P -> pause();
                 case KeyEvent.VK_LEFT -> tryMove(curPiece, curX - 1, curY);
