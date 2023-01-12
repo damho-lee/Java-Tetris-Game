@@ -30,7 +30,7 @@ public class Tetris extends JFrame {
         board.start();
 
         setTitle("Tetris");                //title명
-        setSize(200, 400);         //사이즈 조절
+        setSize(400, 800);         //사이즈 조절
         setDefaultCloseOperation(EXIT_ON_CLOSE); //x누르면 작동 끝
         setLocationRelativeTo(null);          //화면의 가운데 테트리스 게임 출력
     }
