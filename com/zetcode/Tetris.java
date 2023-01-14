@@ -22,17 +22,17 @@ public class Tetris extends JFrame {
 
     private void initUI() {
 
-        statusbar = new JLabel(" 0"); //점수
-        add(statusbar, BorderLayout.SOUTH); //남쪽에 배치
+        statusbar = new JLabel(" 0"); //�젏�닔
+        add(statusbar, BorderLayout.SOUTH); //�궓履쎌뿉 諛곗튂
 
         var board = new Board(this);
         add(board);
         board.start();
 
-        setTitle("Tetris");                //title명
-        setSize(400, 800);         //사이즈 조절
-        setDefaultCloseOperation(EXIT_ON_CLOSE); //x누르면 작동 끝
-        setLocationRelativeTo(null);          //화면의 가운데 테트리스 게임 출력
+        setTitle("Tetris");                //title紐�
+        setSize(400, 800);         //�궗�씠利� 議곗젅
+        setDefaultCloseOperation(EXIT_ON_CLOSE); //x�늻瑜대㈃ �옉�룞 �걹
+        setLocationRelativeTo(null);          //�솕硫댁쓽 媛��슫�뜲 �뀒�듃由ъ뒪 寃뚯엫 異쒕젰
     }
 
     JLabel getStatusBar() {
@@ -41,12 +41,11 @@ public class Tetris extends JFrame {
     }
 
     public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {//이벤트 디스패칭 쓰레드에 의해 Runnalbe.run()을 실행한다. 
-                                      //이 메소드를 호출하면 이벤트 큐에 runnable.run()의 내용을 넣고 바로 리턴한다.
+        EventQueue.invokeLater(() -> {//�씠踰ㅽ듃 �뵒�뒪�뙣移� �벐�젅�뱶�뿉 �쓽�빐 Runnalbe.run()�쓣 �떎�뻾�븳�떎. 
+                                      //�씠 硫붿냼�뱶瑜� �샇異쒗븯硫� �씠踰ㅽ듃 �걧�뿉 runnable.run()�쓽 �궡�슜�쓣 �꽔怨� 諛붾줈 由ы꽩�븳�떎.
 
             var game = new Tetris();
             game.setVisible(true); 
         });
-    }
+    }    
 }
