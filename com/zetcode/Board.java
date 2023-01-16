@@ -21,13 +21,13 @@ public class Board extends JPanel {
     private Timer timer;
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
-    private int numLinesRemoved = 0;
+    private static int numLinesRemoved = 0;
     private int curX = 0;
     private int curY = 0;
     private JLabel statusbar;
     private Shape curPiece;
     private Tetrominoe[] board;
-
+    
     public Board(Tetris parent) {
 
         initBoard(parent);
@@ -38,6 +38,10 @@ public class Board extends JPanel {
         setFocusable(true); // setFocusable(true) -> 포커스를 우선적으로 받음
         statusbar = parent.getStatusBar(); // Tetris.java함수. JLabel리턴
         addKeyListener(new TAdapter()); //맨마지막에 선언되어있음. 키입력에 따른 처리
+    }
+    
+    public static int get_point() {
+    	return numLinesRemoved;
     }
 
     private int squareWidth() {
@@ -63,7 +67,7 @@ public class Board extends JPanel {
         clearBoard();
         newPiece();
 
-        timer = new Timer(PERIOD_INTERVAL, new GameCycle());
+        timer = new Timer(PERIOD_INTERVAL, new GameCycle()); //정해진 시간마다 GameCycle 이벤트
         timer.start();
     }
 
@@ -76,7 +80,7 @@ public class Board extends JPanel {
             statusbar.setText("paused");
         } else {
 
-            statusbar.setText(String.valueOf(numLinesRemoved));
+            statusbar.setText(String.valueOf(numLinesRemoved*10));
         }
 
         repaint();
@@ -183,8 +187,9 @@ public class Board extends JPanel {
             curPiece.setShape(Tetrominoe.NoShape);
             timer.stop();
 
-            var msg = String.format("Game over. Score: %d", numLinesRemoved);
+            var msg = String.format("Game over. Score: %d", numLinesRemoved*10);
             statusbar.setText(msg);
+            new Point();
         }
     }
 

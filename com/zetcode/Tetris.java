@@ -35,11 +35,9 @@ public class Tetris extends JFrame {
     }
 
     public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {//이벤트 디스패칭 쓰레드에 의해 Runnalbe.run()을 실행한다. 
-                                      //이 메소드를 호출하면 이벤트 큐에 runnable.run()의 내용을 넣고 바로 리턴한다.
-
-            var game = new Tetris();
+    	
+        EventQueue.invokeLater(() -> {//이벤트 디스패칭 쓰레드에 의해 Runnalbe.run()을 실행한다. 이 메소드를 호출하면 이벤트 큐에 runnable.run()의 내용을 넣고 바로 리턴한다.
+        	var game = new Tetris();
             game.setVisible(true); 
         });
     }
