@@ -88,7 +88,7 @@ public class Board extends JPanel {
             statusbar.setText("paused");
         } else {
 
-            statusbar.setText(String.valueOf(numLinesRemoved*10));
+            statusbar.setText(String.valueOf(numLinesRemoved));
         }
 
         repaint();
@@ -195,7 +195,7 @@ public class Board extends JPanel {
             curPiece.setShape(Tetrominoe.NoShape);
             timer.stop();
 
-            var msg = String.format("Game over. Score: %d", numLinesRemoved*10);
+            var msg = String.format("Game over. Score: %d", numLinesRemoved);
             statusbar.setText(msg);
             new Point();
         }
@@ -259,7 +259,7 @@ public class Board extends JPanel {
 
         if (numFullLines > 0) {
 
-            numLinesRemoved += numFullLines*bonus[numFullLines];
+            numLinesRemoved += numFullLines*bonus[numFullLines]*10;
             statusbar.setText(String.valueOf(numLinesRemoved));
             isFallingFinished = true;
             curPiece.setShape(Tetrominoe.NoShape);

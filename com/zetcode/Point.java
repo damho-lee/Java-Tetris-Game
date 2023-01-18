@@ -64,7 +64,7 @@ public class Point extends JFrame{
 		}
 		Score_sel();
 		ScoreBoard();
-		if (Board.get_point()*10 > min) {
+		if (Board.get_point() > min) {
 			new Point_Save(this, conn, stmt, rset);
 		}
 	}
@@ -84,7 +84,7 @@ public class Point extends JFrame{
 		private JButton btn = new JButton("SAVE");
 		private void Save() {
 			this.name = tf.getText();
-			this.point = Board.get_point()*10;
+			this.point = Board.get_point();
 			String sql = "insert into point values ('" + this.name + "', '" + this.point + "')";
 			try {
 				rset = stmt.executeQuery(sql);
