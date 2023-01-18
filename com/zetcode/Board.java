@@ -17,7 +17,6 @@ public class Board extends JPanel {
     private final int BOARD_WIDTH = 10;
     private final int BOARD_HEIGHT = 22;
     private final int PERIOD_INTERVAL = 300; //게임속도
-
     private Timer timer;
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
@@ -27,10 +26,19 @@ public class Board extends JPanel {
     private JLabel statusbar;
     private Shape curPiece;
     private Tetrominoe[] board;
+    double bonus[] = new double[5];
     
     public Board(Tetris parent) {
-
+    	init_bonus();
         initBoard(parent);
+    }
+    
+    private void init_bonus() {
+    	bonus[0] = 0;
+    	bonus[1] = 1.0;
+    	bonus[2] = 1.5;
+    	bonus[3] = 2.0;
+    	bonus[4] = 2.5;
     }
 
     private void initBoard(Tetris parent) {
@@ -251,8 +259,7 @@ public class Board extends JPanel {
 
         if (numFullLines > 0) {
 
-            numLinesRemoved += numFullLines;
-
+            numLinesRemoved += numFullLines*bonus[numFullLines];
             statusbar.setText(String.valueOf(numLinesRemoved));
             isFallingFinished = true;
             curPiece.setShape(Tetrominoe.NoShape);
